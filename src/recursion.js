@@ -230,6 +230,25 @@ var multiply = function(x, y) {
 // 13. Write a function that divides two numbers without using the / operator or
 // Math methods to arrive at an approximate quotient (ignore decimal endings).
 var divide = function(x, y) {
+  if (y === 0) {
+    return NaN;
+  }
+  if (x === 0) {
+    return 0;
+  }
+  if (x === y) {
+    return 1;
+  }
+  if (x < 0) {
+    return -divide(-x, y);
+  }
+  if (y < 0) {
+    return -divide(x, -y);
+  }
+  if (x < y) {
+    return 0;
+  }
+  return 1 + divide(x-y, y);
 };
 
 // 14. Find the greatest common divisor (gcd) of two positive numbers. The GCD of two
@@ -238,6 +257,21 @@ var divide = function(x, y) {
 // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
 var gcd = function(x, y) {
+  if (x < 0 || y < 0) {
+    return null
+  }
+  if (x === 0) {
+    return y;
+  }
+  if (y === 0) {
+    return x;
+  }
+  if (x > y) {
+    return gcd(x%y, y);
+  }
+  if (y > x) {
+    return gcd(y%x, x);
+  }
 };
 
 // 15. Write a function that compares each character of two strings and returns true if
@@ -245,6 +279,27 @@ var gcd = function(x, y) {
 // compareStr('house', 'houses') // false
 // compareStr('tomato', 'tomato') // true
 var compareStr = function(str1, str2) {
+  if (str1 === '' && str2 === '') {
+    return true;
+  }
+  if (str1 === '' && str2 !== str1) {
+    return false;
+  }
+  if (str2 === '' && str2 !== str1) {
+    return false;
+  }
+  if (str1.length === 1 && str2.length === 1) {
+    if (str1 === str2) {
+      return true;
+    }
+    return false;
+  }
+  let str1FirstChar = str1[0];
+  let str2FirstChar = str2[0];
+  if (str1FirstChar !== str2FirstChar) {
+    return false;
+  }
+  return compareStr(str1.slice(1), str2.slice(1));
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
