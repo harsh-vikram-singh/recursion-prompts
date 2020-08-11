@@ -305,10 +305,29 @@ var compareStr = function(str1, str2) {
 // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
 var createArray = function(str) {
+  let resultsArray = [];
+  if (str === '') {
+    return [];
+  }
+  if (str.length === 1) {
+    return [str];
+  }
+  resultsArray.push(str[0])
+  return resultsArray.concat(createArray(str.slice(1)));
+  // return [str[0], ...createArray(str.slice(1))]; // creating a new array using destructuring
 };
 
 // 17. Reverse the order of an array
 var reverseArr = function(array) {
+  let resultsArray = [];
+  if (array.length === 0) {
+    return [];
+  }
+  if (array.length === 1) {
+    return array;
+  }
+  resultsArray.push(array[array.length - 1]);
+  return resultsArray.concat(reverseArr(array.slice(0, -1)));
 };
 
 // 18. Create a new array with a given value and length.
